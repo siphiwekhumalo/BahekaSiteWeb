@@ -26,8 +26,8 @@ export default function Testimonials() {
           onMouseLeave={() => setPaused(false)}
           className="relative mx-auto max-w-4xl text-center"
         >
-          <Quote className="mx-auto h-12 w-12 text-brand-400/60" />
-          <div className="relative mt-8 min-h-[220px] sm:min-h-[180px]">
+          <Quote className="mx-auto h-10 w-10 text-gold-400/70 sm:h-12 sm:w-12" />
+          <div className="relative mt-6 min-h-[300px] xs:min-h-[260px] sm:mt-8 sm:min-h-[220px] lg:min-h-[180px]">
             <AnimatePresence mode="wait">
               <motion.figure
                 key={index}
@@ -36,7 +36,7 @@ export default function Testimonials() {
                 exit={{ opacity: 0, y: -16 }}
                 transition={{ duration: 0.4 }}
               >
-                <blockquote className="font-display text-2xl font-medium leading-snug text-white sm:text-3xl">
+                <blockquote className="font-display text-xl font-medium leading-snug text-white sm:text-2xl lg:text-3xl">
                   “{t.quote}”
                 </blockquote>
                 <figcaption className="mt-8">
@@ -47,7 +47,7 @@ export default function Testimonials() {
             </AnimatePresence>
           </div>
 
-          <div className="mt-10 flex items-center justify-center gap-6">
+          <div className="mt-8 flex items-center justify-center gap-4 sm:mt-10 sm:gap-6">
             <button
               type="button"
               onClick={() => go(-1)}

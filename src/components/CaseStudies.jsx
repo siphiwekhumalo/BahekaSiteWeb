@@ -20,7 +20,7 @@ export default function CaseStudies() {
           </a>
         </div>
 
-        <div className="mt-16 grid gap-6 lg:grid-cols-3">
+        <div className="mt-12 grid gap-4 sm:mt-16 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
           {caseStudies.map((c, i) => (
             <motion.article
               key={c.title}
@@ -29,10 +29,12 @@ export default function CaseStudies() {
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.6, delay: i * 0.12 }}
               whileHover={{ y: -8 }}
-              className="group relative flex min-h-[420px] flex-col justify-between overflow-hidden rounded-3xl border border-white/10 bg-ink-900 p-8"
+              className={`group relative flex min-h-[340px] flex-col justify-between overflow-hidden rounded-3xl border border-white/10 bg-ink-900 p-6 sm:min-h-[420px] sm:p-8 ${
+                i === caseStudies.length - 1 ? 'md:col-span-2 lg:col-span-1' : ''
+              }`}
             >
               <div
-                className={`absolute inset-0 bg-gradient-to-br ${c.gradient} opacity-60 transition-opacity duration-500 group-hover:opacity-100`}
+                className={`absolute inset-0 bg-gradient-to-br ${c.gradient} opacity-40 transition-opacity duration-500 group-hover:opacity-70`}
               />
               <div className="absolute inset-0 bg-grid-fade bg-[size:32px_32px] opacity-40 [mask-image:linear-gradient(to_bottom,black,transparent)]" />
 
@@ -46,7 +48,7 @@ export default function CaseStudies() {
               </div>
 
               <div className="relative">
-                <p className="font-display text-6xl font-bold text-white">{c.result}</p>
+                <p className="font-display text-5xl font-bold text-white sm:text-6xl">{c.result}</p>
                 <p className="mt-1 text-sm text-slate-300">{c.resultLabel}</p>
                 <h3 className="mt-6 text-xl font-semibold leading-snug">{c.title}</h3>
               </div>

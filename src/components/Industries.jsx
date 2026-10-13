@@ -11,7 +11,6 @@ export default function Industries() {
 
   return (
     <section id="industries" className="relative scroll-mt-20 py-24 sm:py-32">
-      <div className="absolute inset-x-0 top-1/2 -z-10 h-[500px] -translate-y-1/2 bg-gradient-to-r from-brand-500/5 via-transparent to-gold-500/5" />
       <div className="container-x">
         <SectionHeading
           eyebrow="Industries"
@@ -20,11 +19,11 @@ export default function Industries() {
           description="We bring deep domain knowledge to every engagement, so your technology reflects how your industry really works."
         />
 
-        <div className="mt-16 grid gap-8 lg:grid-cols-[320px_1fr]">
+        <div className="mt-12 grid gap-6 sm:mt-16 lg:grid-cols-[280px_1fr] lg:gap-8 xl:grid-cols-[320px_1fr]">
           <div
             role="tablist"
             aria-label="Industries"
-            className="flex gap-2 overflow-x-auto pb-2 lg:flex-col lg:overflow-visible lg:pb-0"
+            className="no-scrollbar -mx-4 flex snap-x gap-2 overflow-x-auto px-4 pb-2 sm:-mx-6 sm:px-6 lg:mx-0 lg:flex-col lg:overflow-visible lg:px-0 lg:pb-0"
           >
             {industries.map((ind) => {
               const Icon = ind.icon
@@ -36,7 +35,7 @@ export default function Industries() {
                   aria-selected={selected}
                   aria-controls="industry-panel"
                   onClick={() => setActiveId(ind.id)}
-                  className={`relative flex shrink-0 items-center gap-3 rounded-2xl px-4 py-3 text-left text-sm font-medium transition-colors ${
+                  className={`relative flex shrink-0 snap-start items-center gap-3 rounded-2xl px-4 py-3 text-left text-sm font-medium transition-colors ${
                     selected ? 'text-white' : 'text-slate-400 hover:bg-white/[0.03] hover:text-white'
                   }`}
                 >
@@ -54,7 +53,7 @@ export default function Industries() {
             })}
           </div>
 
-          <div id="industry-panel" role="tabpanel" className="relative min-h-[380px]">
+          <div id="industry-panel" role="tabpanel" className="relative lg:min-h-[380px]">
             <AnimatePresence mode="wait">
               <motion.div
                 key={active.id}
@@ -62,14 +61,14 @@ export default function Industries() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -24 }}
                 transition={{ duration: 0.35, ease: 'easeOut' }}
-                className="glass relative h-full overflow-hidden rounded-3xl bg-ink-900/60 p-8 sm:p-12"
+                className="glass relative h-full overflow-hidden rounded-3xl bg-ink-900/60 p-6 sm:p-10 xl:p-12"
               >
-                <ActiveIcon className="absolute -right-8 -top-8 h-56 w-56 text-white/[0.03]" />
-                <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold-400">{active.name}</span>
-                <h3 className="mt-4 text-3xl font-semibold sm:text-4xl">{active.headline}</h3>
-                <p className="mt-4 max-w-2xl text-lg leading-relaxed text-slate-400">{active.body}</p>
+                <ActiveIcon className="absolute -right-8 -top-8 h-40 w-40 text-white/[0.03] sm:h-56 sm:w-56" />
+                <span className="text-gradient text-xs font-semibold uppercase tracking-[0.25em]">{active.name}</span>
+                <h3 className="mt-4 text-2xl font-semibold sm:text-3xl xl:text-4xl">{active.headline}</h3>
+                <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-400 sm:text-lg">{active.body}</p>
 
-                <div className="mt-10 grid gap-4 sm:grid-cols-3">
+                <div className="mt-8 grid gap-3 sm:mt-10 sm:grid-cols-3 sm:gap-4">
                   {active.outcomes.map((o, i) => (
                     <motion.div
                       key={o}

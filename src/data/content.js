@@ -15,12 +15,14 @@ import {
   Building2,
 } from 'lucide-react'
 
+// `section` links scroll to a section on the home page; others are separate pages
 export const navLinks = [
-  { label: 'Services', href: '#services' },
-  { label: 'Industries', href: '#industries' },
-  { label: 'Approach', href: '#approach' },
-  { label: 'Work', href: '#work' },
-  { label: 'About', href: '#about' },
+  { label: 'Services', href: '/#services', section: 'services' },
+  { label: 'Products', href: '/products' },
+  { label: 'Industries', href: '/#industries', section: 'industries' },
+  { label: 'Approach', href: '/#approach', section: 'approach' },
+  { label: 'Work', href: '/#work', section: 'work' },
+  { label: 'About', href: '/#about', section: 'about' },
 ]
 
 export const rotatingWords = ['transform', 'modernise', 'scale', 'automate', 'innovate']
@@ -173,21 +175,21 @@ export const caseStudies = [
     title: 'Predictive maintenance platform for a multi-site mining operation',
     result: '32%',
     resultLabel: 'reduction in unplanned downtime',
-    gradient: 'from-brand-500/40 via-brand-400/10 to-transparent',
+    gradient: 'from-brand-600/40 via-brand-500/5 to-transparent',
   },
   {
     tag: 'Financial Services · Europe',
     title: 'Cloud-native digital onboarding for a retail lender',
     result: '4×',
     resultLabel: 'faster customer onboarding',
-    gradient: 'from-gold-500/40 via-gold-400/10 to-transparent',
+    gradient: 'from-gold-500/30 via-gold-600/5 to-transparent',
   },
   {
     tag: 'Logistics · Middle East',
     title: 'Real-time fleet visibility and route optimisation suite',
     result: '18%',
     resultLabel: 'lower fuel and fleet costs',
-    gradient: 'from-sky-500/40 via-sky-400/10 to-transparent',
+    gradient: 'from-brand-600/30 via-gold-600/5 to-transparent',
   },
 ]
 

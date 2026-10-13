@@ -1,14 +1,16 @@
 import { ArrowUp, Linkedin, Github, Twitter } from 'lucide-react'
 import Logo from './Logo.jsx'
-import { navLinks, services, industries } from '../data/content.js'
+import { Link } from '../router.jsx'
+import { navLinks, services } from '../data/content.js'
+import { products } from '../data/products.js'
 
 export default function Footer() {
   const year = new Date().getFullYear()
   return (
-    <footer className="relative border-t border-white/10 bg-ink-950 pt-20">
+    <footer className="relative border-t border-white/10 bg-ink-950 pt-14 sm:pt-20">
       <div className="container-x">
-        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
-          <div>
+        <div className="grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-3 lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:gap-12">
+          <div className="col-span-2 md:col-span-3 lg:col-span-1">
             <Logo />
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-slate-400">
               Digital transformation and custom software engineering for ambitious organisations worldwide. Proudly
@@ -33,16 +35,19 @@ export default function Footer() {
           </div>
 
           <FooterColumn title="Company" links={[...navLinks, { label: 'Contact', href: '#contact' }]} />
-          <FooterColumn title="Services" links={services.map((s) => ({ label: s.title, href: '#services' }))} />
+          <FooterColumn title="Services" links={services.map((s) => ({ label: s.title, href: '/#services' }))} />
           <FooterColumn
-            title="Industries"
-            links={industries.slice(0, 6).map((i) => ({ label: i.name, href: '#industries' }))}
+            title="Products"
+            links={[
+              ...products.map((p) => ({ label: p.name, href: `/products#${p.id}` })),
+              { label: 'All products', href: '/products' },
+            ]}
           />
         </div>
 
-        <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/10 py-8 text-sm text-slate-500 sm:flex-row">
+        <div className="mt-12 flex flex-col-reverse items-center justify-between gap-4 border-t border-white/10 py-8 text-center text-sm text-slate-500 sm:mt-16 md:flex-row md:text-left">
           <p>© {year} Baheka Technology (Pty) Ltd. All rights reserved.</p>
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
             <a href="#" className="hover:text-white">Privacy</a>
             <a href="#" className="hover:text-white">POPIA</a>
             <a href="#" className="hover:text-white">Terms</a>
@@ -70,13 +75,13 @@ export default function Footer() {
 function FooterColumn({ title, links }) {
   return (
     <div>
-      <h4 className="text-sm font-semibold uppercase tracking-widest text-white">{title}</h4>
+      <h4 className="text-xs font-semibold uppercase tracking-widest text-gold-300 sm:text-sm">{title}</h4>
       <ul className="mt-5 space-y-3">
         {links.map((l) => (
           <li key={l.label}>
-            <a href={l.href} className="text-sm text-slate-400 transition hover:text-brand-300">
+            <Link href={l.href} className="text-sm text-slate-400 transition hover:text-brand-300">
               {l.label}
-            </a>
+            </Link>
           </li>
         ))}
       </ul>

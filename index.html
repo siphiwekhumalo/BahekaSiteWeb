@@ -8,7 +8,19 @@
       name="description"
       content="Baheka Technology is a South African digital transformation and custom software engineering partner for cross-industry companies worldwide."
     />
-    <meta name="theme-color" content="#05070f" />
+    <meta name="theme-color" content="#050505" />
+    <script>
+      // Apply the saved/system theme before first paint to avoid a flash
+      ;(function () {
+        var pref = 'system'
+        try {
+          pref = localStorage.getItem('baheka-theme') || 'system'
+        } catch (e) {}
+        var dark =
+          pref === 'dark' || (pref !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches)
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light'
+      })()
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

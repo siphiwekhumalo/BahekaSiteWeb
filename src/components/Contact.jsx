@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Mail, Phone, MapPin, Send, CheckCircle2, Loader2 } from 'lucide-react'
 import { services } from '../data/content.js'
+import { products } from '../data/products.js'
 
 const initialForm = { name: '', email: '', company: '', service: '', message: '' }
 
@@ -15,7 +16,7 @@ export default function Contact() {
   const validate = () => {
     const next = {}
     if (!form.name.trim()) next.name = 'Please enter your name'
-    if (!/^\S+@\S+\.\S+$/.test(form.email)) next.email = 'Please enter a valid email'
+    if (!/^[^\s@]+@[^\s@.]+(\.[^\s@.]+)+$/.test(form.email)) next.email = 'Please enter a valid email'
     if (form.message.trim().length < 10) next.message = 'Tell us a little more (10+ characters)'
     setErrors(next)
     return Object.keys(next).length === 0
@@ -36,11 +37,9 @@ export default function Contact() {
 
   return (
     <section id="contact" className="relative scroll-mt-20 py-24 sm:py-32">
-      <div className="absolute inset-x-0 bottom-0 -z-10 h-[600px] bg-gradient-to-t from-brand-500/10 to-transparent" />
       <div className="container-x">
-        <div className="glass grid overflow-hidden rounded-[2rem] bg-ink-900/60 lg:grid-cols-[1fr_1.3fr]">
-          <div className="relative overflow-hidden bg-gradient-to-br from-brand-500/20 via-ink-900 to-ink-900 p-8 sm:p-12">
-            <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-gold-400/10 blur-3xl" />
+        <div className="glass grid overflow-hidden rounded-3xl bg-ink-900/60 sm:rounded-[2rem] lg:grid-cols-[1fr_1.3fr]">
+          <div className="relative overflow-hidden border-b border-white/10 bg-gradient-to-br from-brand-600/10 via-ink-900 to-ink-900 p-6 sm:p-10 lg:border-b-0 lg:border-r xl:p-12">
             <span className="eyebrow">Let's talk</span>
             <h2 className="mt-6 text-3xl font-semibold leading-tight sm:text-4xl">
               Ready to build what's <span className="text-gradient">next?</span>
@@ -59,10 +58,10 @@ export default function Contact() {
                   <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-white/10 bg-white/5 text-brand-300">
                     <Icon className="h-5 w-5" />
                   </span>
-                  <div>
+                  <div className="min-w-0">
                     <p className="text-xs uppercase tracking-widest text-slate-500">{label}</p>
                     {href ? (
-                      <a href={href} className="font-medium text-white hover:text-brand-300">
+                      <a href={href} className="break-all font-medium text-white hover:text-brand-300 sm:break-normal">
                         {value}
                       </a>
                     ) : (
@@ -74,7 +73,7 @@ export default function Contact() {
             </ul>
           </div>
 
-          <div className="relative p-8 sm:p-12">
+          <div className="relative p-6 sm:p-10 xl:p-12">
             <AnimatePresence mode="wait">
               {status === 'sent' ? (
                 <motion.div
@@ -136,12 +135,21 @@ export default function Contact() {
                       Area of interest
                     </label>
                     <select id="service" name="service" value={form.service} onChange={update} className={field}>
-                      <option value="">Select a service</option>
-                      {services.map((s) => (
-                        <option key={s.title} value={s.title}>
-                          {s.title}
-                        </option>
-                      ))}
+                      <option value="">Select a service or product</option>
+                      <optgroup label="Services">
+                        {services.map((s) => (
+                          <option key={s.title} value={s.title}>
+                            {s.title}
+                          </option>
+                        ))}
+                      </optgroup>
+                      <optgroup label="Products">
+                        {products.map((p) => (
+                          <option key={p.id} value={p.name}>
+                            {p.name} ({p.category})
+                          </option>
+                        ))}
+                      </optgroup>
                     </select>
                   </div>
                   <div className="sm:col-span-2">
@@ -163,7 +171,7 @@ export default function Contact() {
                     <p className="text-xs text-slate-500">
                       We respect your privacy. Your details are handled in line with POPIA.
                     </p>
-                    <button type="submit" disabled={status === 'sending'} className="btn-primary disabled:opacity-70">
+                    <button type="submit" disabled={status === 'sending'} className="btn-primary w-full disabled:opacity-70 sm:w-auto">
                       {status === 'sending' ? (
                         <>
                           <Loader2 className="h-4 w-4 animate-spin" /> Sending...

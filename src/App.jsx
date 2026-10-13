@@ -1,33 +1,36 @@
+import { useEffect } from 'react'
 import Navbar from './components/Navbar.jsx'
-import Hero from './components/Hero.jsx'
-import TechMarquee from './components/TechMarquee.jsx'
-import Services from './components/Services.jsx'
-import Industries from './components/Industries.jsx'
-import Approach from './components/Approach.jsx'
-import Stats from './components/Stats.jsx'
-import CaseStudies from './components/CaseStudies.jsx'
-import Testimonials from './components/Testimonials.jsx'
-import About from './components/About.jsx'
-import Contact from './components/Contact.jsx'
 import Footer from './components/Footer.jsx'
 import ScrollProgress from './components/ScrollProgress.jsx'
+import HomePage from './pages/HomePage.jsx'
+import ProductsPage from './pages/ProductsPage.jsx'
+import { usePath, scrollToHash } from './router.jsx'
+
+const routes = {
+  '/': { component: HomePage, title: 'Baheka Technology | Digital Transformation & Software Engineering' },
+  '/products': { component: ProductsPage, title: 'Products | ConstructOS, KraalOS & Novia | Baheka Technology' },
+}
 
 export default function App() {
+  const path = usePath()
+  const route = routes[path.replace(/\/+$/, '') || '/'] ?? routes['/']
+  const Page = route.component
+
+  // On page change: update the title, then jump to the #section (if any) or the top
+  useEffect(() => {
+    document.title = route.title
+    const id = setTimeout(() => {
+      if (!scrollToHash(window.location.hash, 'auto')) window.scrollTo({ top: 0, behavior: 'auto' })
+    }, 0)
+    return () => clearTimeout(id)
+  }, [path, route.title])
+
   return (
     <div className="relative overflow-x-clip">
       <ScrollProgress />
-      <Navbar />
+      <Navbar path={path} />
       <main>
-        <Hero />
-        <TechMarquee />
-        <Services />
-        <Industries />
-        <Approach />
-        <Stats />
-        <CaseStudies />
-        <Testimonials />
-        <About />
-        <Contact />
+        <Page />
       </main>
       <Footer />
     </div>

@@ -10,7 +10,7 @@ export default function Approach() {
 
   return (
     <section id="approach" className="relative scroll-mt-20 py-24 sm:py-32">
-      <div className="container-x grid gap-16 lg:grid-cols-[1fr_1.2fr]">
+      <div className="container-x grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
         <div className="lg:sticky lg:top-32 lg:self-start">
           <SectionHeading
             align="left"
@@ -19,7 +19,7 @@ export default function Approach() {
             highlight="idea to impact"
             description="Every engagement follows a clear, collaborative delivery model, keeping risk low, momentum high and your teams in control."
           />
-          <div className="mt-10 grid grid-cols-2 gap-4">
+          <div className="mt-8 grid grid-cols-1 gap-3 xs:grid-cols-2 sm:mt-10 sm:gap-4">
             {[
               ['Agile', 'Two-week delivery sprints'],
               ['Transparent', 'Shared boards & demos'],
@@ -40,7 +40,7 @@ export default function Approach() {
             style={{ height: lineHeight }}
             className="absolute left-[15px] top-0 w-px bg-gradient-to-b from-brand-400 to-gold-400 sm:left-[19px]"
           />
-          <ol className="space-y-14">
+          <ol className="space-y-8 sm:space-y-14">
             {process.map((p, i) => (
               <motion.li
                 key={p.step}
@@ -53,8 +53,8 @@ export default function Approach() {
                 <span className="absolute -left-10 top-1 grid h-8 w-8 place-items-center rounded-full border border-brand-400/40 bg-ink-950 font-display text-xs font-bold text-brand-300 sm:-left-14 sm:h-10 sm:w-10 sm:text-sm">
                   {p.step}
                 </span>
-                <div className="glass rounded-3xl bg-ink-900/40 p-6 sm:p-8">
-                  <h3 className="text-2xl font-semibold">{p.title}</h3>
+                <div className="glass rounded-3xl bg-ink-900/40 p-5 sm:p-8">
+                  <h3 className="text-xl font-semibold sm:text-2xl">{p.title}</h3>
                   <p className="mt-3 leading-relaxed text-slate-400">{p.body}</p>
                 </div>
               </motion.li>
